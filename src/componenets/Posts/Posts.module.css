@@ -1,0 +1,47 @@
+.Content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.Content li {
+  list-style: none;
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  border: 1px solid grey;
+  border-radius: 5px;
+  box-shadow: 3px 3px 3px #80808073;
+  padding: 3px;
+  margin: 5px;
+  justify-content: space-between;
+  color: #907a38;
+}
+.Name {
+  font-size: 18px;
+  font-weight: bold;
+}
+.Title {
+  font-style: italic;
+  margin: -15px 0px -5px 0px;
+}
+.Company {
+  font-size: 17px;
+  font-weight: bold;
+}
+.Form {
+  display: flex;
+}
+.Label {
+  background-color: #ffc107;
+  border-radius: 3px;
+}
+.FormBtn > button {
+  margin-top: -25px;
+}
+.MainTitle {
+  text-align: center;
+  color: #ffc107d9;
+  text-shadow: 1px 1px 1px grey;
+  font-size: 45px;
+}

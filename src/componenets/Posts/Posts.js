@@ -4,35 +4,41 @@ import styles from "./Posts.module.css";
 const Posts = ({ data }) => {
   const [myLabel, setMyLabel] = useState("");
   const [myData, setMyData] = useState([]);
-  const [search, setSearch] = useState([]);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     setMyData(data);
-  }, []);
+  }, [data]);
 
   const labelHandler = (e, id) => {
     e.preventDefault();
-    for (const person of data) {
+    const newData = [...myData];
+    for (const person of newData) {
       if (person.uuid === id) {
-        person.label = myLabel.toLowerCase();
+        person.label = myLabel;
       }
     }
-    setMyData([data]);
+    setMyData(newData);
   };
 
   const backgroundHandler = (color, id) => {
-    for (const person of data) {
+    const newData = [...myData];
+    for (const person of myData) {
       if (person.uuid === id) {
         person.color = color;
       }
     }
-    setMyData([data]);
+    setMyData(newData);
   };
 
   useEffect(() => {
     console.log(myData, "mydata");
     console.log(data, "data");
   }, [myData, data]);
+
+  const filtered = myData.filter((person) => {
+    return person.label.toLowerCase().includes(search);
+  });
 
   return (
     <div>
@@ -42,9 +48,8 @@ const Posts = ({ data }) => {
         type="text"
         onChange={(e) => setSearch(e.target.value.toLowerCase())}
       />
-      {search}
       <ul className={styles.Content}>
-        {data.map((person) => (
+        {filtered.map((person) => (
           <li key={person.uuid} style={{ background: person.color }}>
             <p className={styles.Name}>{person.name}</p>
             <hr />

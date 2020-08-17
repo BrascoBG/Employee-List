@@ -17,6 +17,9 @@ function App() {
   }, []);
 
   useEffect(() => {
+    for (const insert of data) {
+      insert.label = "";
+    }
     console.log(data);
   }, [data]);
 

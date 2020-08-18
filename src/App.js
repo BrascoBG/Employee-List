@@ -8,24 +8,51 @@ function App() {
   const [postPerPage] = useState(20);
 
   useEffect(() => {
-    fetch("https://reward-gateway-82f9c.firebaseio.com/list.json")
-      .then((response) => response.json())
-      .then((resData) => {
-        setData(resData);
-      })
-      .catch((err) => console.log(err));
+    const localData = localStorage.getItem("Data");
+    if (localData === null) {
+      fetch("https://reward-gateway-82f9c.firebaseio.com/list.json")
+        .then((response) => response.json())
+        .then((resData) => {
+          setData(resData);
+        })
+        .catch((err) => console.log(err));
+    } else {
+      setData(JSON.parse(localData));
+    }
   }, []);
 
   useEffect(() => {
     for (const insert of data) {
-      insert.label = "";
+      if (insert.label === undefined) {
+        insert.label = "";
+        insert.color = "";
+      }
     }
     console.log(data);
   }, [data]);
 
+  let newData = [...data];
+  const allDataLabel = (e, id, label) => {
+    for (const person of newData) {
+      if (person.uuid === id) {
+        person.label = label;
+      }
+    }
+    localStorage.setItem("Data", JSON.stringify(newData));
+  };
+
+  const allDataColor = (color, id) => {
+    for (const person of newData) {
+      if (person.uuid === id) {
+        person.color = color;
+      }
+    }
+    localStorage.setItem("Data", JSON.stringify(newData));
+  };
+
   const indexOfLastPost = currentPage * postPerPage;
   const indexOfFirstPost = indexOfLastPost - postPerPage;
-  const currentPosts = data.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = newData.slice(indexOfFirstPost, indexOfLastPost);
 
   const paginate = (e, pageNumber) => {
     e.preventDefault();
@@ -35,7 +62,11 @@ function App() {
 
   return (
     <div className="App">
-      <Posts data={currentPosts} />
+      <Posts
+        allDataLabel={allDataLabel}
+        allDataColor={allDataColor}
+        data={currentPosts}
+      />
       <Pagination
         postsPerPage={postPerPage}
         totalPosts={data.length}

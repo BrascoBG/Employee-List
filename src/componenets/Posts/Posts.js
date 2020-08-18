@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Posts.module.css";
 
-const Posts = ({ data, allDataLabel, allDataColor }) => {
+const Posts = ({ data, allDataLabel, allDataColor, allData, delLabel }) => {
   const [myLabel, setMyLabel] = useState("");
   const [myData, setMyData] = useState([]);
   const [search, setSearch] = useState("");
@@ -25,7 +25,7 @@ const Posts = ({ data, allDataLabel, allDataColor }) => {
 
   const backgroundHandler = (color, id) => {
     const newData = [...myData];
-    for (const person of myData) {
+    for (const person of newData) {
       if (person.uuid === id) {
         person.color = color;
       }
@@ -37,7 +37,8 @@ const Posts = ({ data, allDataLabel, allDataColor }) => {
   useEffect(() => {
     console.log(myData, "mydata");
     console.log(data, "data");
-  }, [myData, data]);
+    console.log(allData, "allData");
+  }, [myData, data, allData]);
 
   const imageView = (img) => {
     setImage(img);
@@ -45,6 +46,17 @@ const Posts = ({ data, allDataLabel, allDataColor }) => {
 
   const closeImage = () => {
     setImage("");
+  };
+
+  const deleteLabel = (id) => {
+    const newData = [...myData];
+    for (const person of newData) {
+      if (person.uuid === id) {
+        person.label = "";
+      }
+    }
+    setMyData(newData);
+    delLabel(id);
   };
 
   let imageFull =
@@ -57,9 +69,16 @@ const Posts = ({ data, allDataLabel, allDataColor }) => {
       </div>
     ) : null;
 
-  const filtered = myData.filter((person) => {
-    return person.label.toLowerCase().includes(search);
-  });
+  let filtered;
+  if (search === "") {
+    filtered = myData.filter((person) => {
+      return person.label.toLowerCase().includes(search);
+    });
+  } else {
+    filtered = allData.filter((person) => {
+      return person.label.toLowerCase().includes(search);
+    });
+  }
 
   return (
     <div>
@@ -79,7 +98,6 @@ const Posts = ({ data, allDataLabel, allDataColor }) => {
         {filtered.map((person) => (
           <li key={person.uuid} style={{ background: person.color }}>
             <p className={styles.Name}>{person.name}</p>
-            <hr />
             <p className={styles.Title}>{person.title} at</p>
             <p className={styles.Company}>{person.company}</p>
             <img
@@ -88,8 +106,32 @@ const Posts = ({ data, allDataLabel, allDataColor }) => {
               className={styles.Img}
               onClick={() => imageView(person.avatar)}
             />
-            <p>{person.bio}</p>
-            <p className={styles.Label}>{person.label}</p>
+            <p className={styles.Bio}>
+              {person.bio.replace(/<\/?[^>]+(>|$)/g, "")}
+            </p>
+            {person.label ? (
+              <div className={styles.LabelDel}>
+                <p className={styles.Label}>{person.label}</p>
+                <svg
+                  onClick={() => deleteLabel(person.uuid)}
+                  width="1.5em"
+                  height="1.5em"
+                  viewBox="0 0 16 16"
+                  className="bi bi-trash-fill"
+                  fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                  style={{ cursor: "pointer", margin: "auto 0" }}
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"
+                  />
+                </svg>
+              </div>
+            ) : (
+              ""
+            )}
+
             <form
               className={styles.FormBtn}
               onSubmit={(e) => labelHandler(e, person.uuid)}

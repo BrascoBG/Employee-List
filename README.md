@@ -1,3 +1,24 @@
+# Employee List (ReactJS SPA)
+
+Consuming data from API and displaying it in nicely styled list.
+
+Using pagination to display 20 items per page.
+
+Implemented functionality to expand each avatar image to full size/fit screen.
+
+Added a dropdown menu to each list item which allows the user to select a
+background color for the corresponding list item.
+
+Added a text input to each list item which allows the user to enter a label for the
+corresponding item.
+
+Added a text input to the page which allows the user to filter the listed items by
+the label data entered through the input.
+
+LocalStorage keeps the data on refresh.
+
+![screenshot](https://github.com/BrascoBG/Employee-List/blob/master/src/assets/screenshot.jpg?raw=true)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

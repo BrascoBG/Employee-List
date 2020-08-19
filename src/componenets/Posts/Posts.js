@@ -90,7 +90,7 @@ const Posts = ({ data, allDataLabel, allDataColor, allData, delLabel }) => {
         rel="noopener noreferrer"
         className={styles.Github}
       >
-        <img src={GitHub} alt="GitHub" />
+        <img src={GitHub} alt="GitHub" title="GitHub Code Here" />
       </a>
 
       <hr style={{ width: "90%" }} />

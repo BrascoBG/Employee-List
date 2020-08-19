@@ -119,6 +119,11 @@
   animation-name: pulse;
   animation-duration: 2s;
   animation-iteration-count: infinite;
+  opacity: 0.5;
+}
+.Github Img:hover {
+  opacity: 1;
+  transition: 500ms;
 }
 @keyframes pulse {
   0% {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Posts.module.css";
+import GitHub from "../../assets/github.png";
 
 const Posts = ({ data, allDataLabel, allDataColor, allData, delLabel }) => {
   const [myLabel, setMyLabel] = useState("");
@@ -83,6 +84,15 @@ const Posts = ({ data, allDataLabel, allDataColor, allData, delLabel }) => {
   return (
     <div>
       <h1 className={styles.MainTitle}>Our Employees</h1>
+      <a
+        href="https://github.com/BrascoBG/Employee-List"
+        target="_blank"
+        rel="noopener noreferrer"
+        className={styles.Github}
+      >
+        <img src={GitHub} alt="GitHub" />
+      </a>
+
       <hr style={{ width: "90%" }} />
       {imageFull}
       <div style={{ display: "flex", justifyContent: "center" }}>

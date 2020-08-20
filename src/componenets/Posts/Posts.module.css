@@ -1,7 +1,7 @@
 .Content {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
   padding-right: 40px;
 }
 .Content li {
@@ -134,5 +134,13 @@
   }
   100% {
     transform: scale(1);
+  }
+}
+@media screen and (max-width: 550px) {
+  .Github {
+    display: flex;
+    justify-content: center;
+    width: 60px;
+    margin: 0 auto;
   }
 }

@@ -111,7 +111,7 @@ const Posts = ({ data, allDataLabel, allDataColor, allData, delLabel }) => {
               onClick={() => imageView(person.avatar)}
             />
             <p className={styles.Bio}>
-              {person.bio.replace(/<\/?[^>]+(>|$)/g, "")}
+              {person.bio.toString().replace(/(<([^>]+)>)/gi, "")}
             </p>
             {person.label ? (
               <div className={styles.LabelDel}>

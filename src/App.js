@@ -10,7 +10,7 @@ function App() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const localData = localStorage.getItem("Data");
+    const localData = localStorage.getItem("EmployeesRG");
     if (localData === null) {
       fetch("https://reward-gateway-82f9c.firebaseio.com/list.json")
         .then((response) => response.json())
@@ -48,7 +48,7 @@ function App() {
         person.label = label;
       }
     }
-    localStorage.setItem("Data", JSON.stringify(newData));
+    localStorage.setItem("EmployeesRG", JSON.stringify(newData));
   };
 
   const allDataColor = (color, id) => {
@@ -57,7 +57,7 @@ function App() {
         person.color = color;
       }
     }
-    localStorage.setItem("Data", JSON.stringify(newData));
+    localStorage.setItem("EmployeesRG", JSON.stringify(newData));
   };
 
   const delLabel = (id) => {
@@ -66,7 +66,7 @@ function App() {
         person.label = "";
       }
     }
-    localStorage.setItem("Data", JSON.stringify(newData));
+    localStorage.setItem("EmployeesRG", JSON.stringify(newData));
   };
 
   const indexOfLastPost = currentPage * postPerPage;

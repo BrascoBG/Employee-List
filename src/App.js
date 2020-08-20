@@ -39,7 +39,6 @@ function App() {
         insert.bio = "Unfortunately there is no details about this employee.";
       }
     }
-    console.log(data);
   }, [data]);
 
   let newData = [...data];
@@ -62,7 +61,6 @@ function App() {
   };
 
   const delLabel = (id) => {
-    console.log(id);
     for (const person of newData) {
       if (person.uuid === id) {
         person.label = "";

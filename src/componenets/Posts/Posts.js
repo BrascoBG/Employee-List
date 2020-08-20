@@ -35,12 +35,6 @@ const Posts = ({ data, allDataLabel, allDataColor, allData, delLabel }) => {
     setMyData(newData);
   };
 
-  useEffect(() => {
-    console.log(myData, "mydata");
-    console.log(data, "data");
-    console.log(allData, "allData");
-  }, [myData, data, allData]);
-
   const imageView = (img) => {
     setImage(img);
   };

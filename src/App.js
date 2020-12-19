@@ -12,7 +12,7 @@ function App() {
   useEffect(() => {
     const localData = localStorage.getItem("EmployeesRG");
     if (localData === null) {
-      fetch("https://reward-gateway-82f9c.firebaseio.com/list.json")
+      fetch("https://reward-gateway-92f9c.firebaseio.com/test.json")
         .then((response) => response.json())
         .then((resData) => {
           setData(resData);
